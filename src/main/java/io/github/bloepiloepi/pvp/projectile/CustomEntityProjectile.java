@@ -106,11 +106,11 @@ public class CustomEntityProjectile extends EntityProjectile {
 			if (super.onGround) {
 				return;
 			}
+			EventDispatcher.call(new ProjectileBlockHitEvent(this));
 			super.onGround = true;
 			this.velocity = Vec.ZERO;
 			sendPacketToViewersAndSelf(getVelocityPacket());
 			setNoGravity(true);
-			EventDispatcher.call(new ProjectileBlockHitEvent(this));
 			onStuck();
 		} else {
 			Entity entity = ((State.HitEntity) state).entity;
